@@ -1,3 +1,6 @@
+
+#! changed the list to return a function named scrabble_checker():
+
 def scrabble_checker():
     return [
     "aa",
