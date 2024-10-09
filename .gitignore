@@ -1,1 +1,2 @@
+#! hiding the scores in .env file so that no one else can see them!
 .env
