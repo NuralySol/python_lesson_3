@@ -156,8 +156,8 @@ print(
 )  # Output: This is a function that does nothing but has a docstring.
 
 
+#! stats_calculator function and it is a more encompassing function.
 
-#! stats_calculator function and it is a more encompassing function. 
 
 def stats_calculator(
     operation="mean",
@@ -168,17 +168,17 @@ def stats_calculator(
 ) -> float:
     """
     Calculate statistics for a list of numbers with optional custom operations.
-    
+
     Args:
         operation (str): The operation to perform ('mean', 'sum', 'product', 'custom').
         *args: Variable-length argument list of numbers.
         precision (int, optional): Number of decimal places to round the result to. Default is 2.
         custom_operation (function, optional): A user-defined function for custom calculations.
         **kwargs: Additional keyword arguments for custom logic (e.g., power for exponentiation).
-    
+
     Returns:
         float: The result of the statistical operation.
-    
+
     Examples:
         - stats_calculator('mean', 1, 2, 3, 4) -> 2.5
         - stats_calculator('product', 1, 2, 3, 4) -> 24
@@ -248,48 +248,123 @@ print(stats_calculator("sum", 1, 2, 3, 4, power=2))  # (1+2+3+4)^2 = 100
 sum_of_numbers = sum([1, 2, 3])
 print(f"Factorial of sum: {factorial(sum_of_numbers)}")  # 6! = 720
 
+
 def greet(name=None):
-    name = name or "Guest"  # If name is None (or any falsy value), it defaults to "Guest"
+    name = (
+        name or "Guest"
+    )  # If name is None (or any falsy value), it defaults to "Guest"
     print("Hello,", name)
+
 
 greet()
 greet("Nuraly")
 
+
 #! function with a validator and user input (functions are first class citizen they can be fed inside of another function)
 def validate_username(username):
-    if not username or not username.isalpha(): 
-        print("Invalid username! Please enter a valid username containing only letters.")
+    if not username or not username.isalpha():
+        print(
+            "Invalid username! Please enter a valid username containing only letters."
+        )
         return False
     return True
+
 
 def greet(username=None):
     if not username:
         username = input("Enter your avatar username: ")
-    
+
     if validate_username(username):
         print(f"Hello, {username}!")
     else:
         print("Hello, Player! Want to provide the username!?")
 
-greet() 
+
+greet()
 
 #! lambda function
-add = lambda x, y: x + y 
+add = lambda x, y: x + y
 
-result = add(5, 3) 
+result = add(5, 3)
 print(result)
 
 #! the regular function (can be called anywhere first-class citizen)
 
+
 def multiply_def(x, y):
     return x * y
 
-house_area = multiply_def(12, 10)
-print("Area of the house:", house_area)
 
-#! second lambda function area of the house
+master_bedroom = multiply_def(24, 17)
+second_bedroom = multiply_def(16, 13)
+den = multiply_def(15, 17)
+living_room = multiply_def(23, 30)
+dining_room = multiply_def(18, 18)
+
+house_areas = [master_bedroom, second_bedroom, den, living_room, dining_room]
+
+print("Areas of the house:", house_areas)
+
 
 multiply = lambda x, y: x * y
 
-result_house_area = multiply(12, 10)
-print(result_house_area)
+master_bedroom = multiply(24, 17)
+second_bedroom = multiply(16, 13)
+den = multiply(15, 17)
+living_room = multiply(23, 30)
+dining_room = multiply(18, 18)
+
+house_area = [master_bedroom, second_bedroom, den, living_room, dining_room]
+total_area = 0
+
+for num in house_area:
+    total_area += num
+
+print("Areas of the house:", house_area)
+print("Total area of the house is", total_area)
+
+#! Unit conversion function:
+
+def convert_units(value, from_unit, to_unit):
+    length_factors = {
+        "mm": 0.001,
+        "cm": 0.01,
+        "m": 1,
+        "km": 1000,
+        "in": 0.0254,
+        "ft": 0.3048,
+        "yd": 0.9144,
+        "mi": 1609.34,
+    }
+
+    weight_factors = {"mg": 0.001, "g": 1, "kg": 1000, "oz": 28.3495, "lb": 453.592}
+
+    if from_unit in length_factors and to_unit in length_factors:
+        factors = length_factors
+    elif from_unit in weight_factors and to_unit in weight_factors:
+        factors = weight_factors
+    else:
+        raise ValueError("Invalid or incompatible units.")
+
+    base_value = value * factors[from_unit]
+
+    result = base_value / factors[to_unit]
+
+    return result
+
+
+try:
+    value = float(input("Enter the value: "))
+    from_unit = input(
+        "Enter the unit to convert from (e.g., 'm', 'kg', 'mi', 'oz'): "
+    ).lower()
+    to_unit = input(
+        "Enter the unit to convert to (e.g., 'ft', 'g', 'cm', 'lb'): "
+    ).lower()
+    result = convert_units(value, from_unit, to_unit)
+    print(f"{value} {from_unit} is equal to {result:.4f} {to_unit}")
+except ValueError as e:
+    print("Error:", str(e))
+except Exception as e:
+    print("An unexpected error occurred:", str(e))
+

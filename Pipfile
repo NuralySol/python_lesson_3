@@ -4,6 +4,18 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+appdirs = "*"
+flexcache = "*"
+flexparser = "*"
+numpy = "*"
+pandas = "*"
+Pint = "*"
+python-dateutil = "*"
+python-dotenv = "*"
+pytz = "*"
+six = "*"
+typing-extensions = "*"
+tzdata = "*"
 
 [dev-packages]
 
